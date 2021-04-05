@@ -24,8 +24,34 @@
  *  Rivero Johnatan
  */
 
+#include "Calculator.h"
 
 int main()
 {
+	float firstNumber;
+	float secondNumber;
+	char operation;
+	char flag;
+
+	setbuf(stdout, NULL);
+
+	do {
+		printf("Ingrese A: ");
+		scanf("%f", &firstNumber);
+		printf("Ingrese B: ");
+		scanf("%f", &secondNumber);
+
+		printf("Ingrese la operacion: Suma (s), Resta (r), División (d), Multiplicación (m) o Factorial (f)\n");
+		__fpurge(stdin);
+		scanf("%c", &operation);
+
+		DoOperation(firstNumber, secondNumber, operation);
+
+		printf("¿Desea realizar otra operacion? s/n");
+		__fpurge(stdin);
+		scanf("%c", &flag);
+
+	}while(flag == 's');
+
 	return 0;
 }
