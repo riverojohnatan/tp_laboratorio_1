@@ -24,32 +24,27 @@
  *  Rivero Johnatan
  */
 
+#include "InputOutput.h"
+#include "Validations.h"
 #include "Calculator.h"
 
 int main()
 {
-	float firstNumber;
-	float secondNumber;
-	char operation;
 	char flag;
+	sCalculator calculator;
 
 	setbuf(stdout, NULL);
 
 	do {
-		printf("Ingrese A: ");
-		scanf("%f", &firstNumber);
-		printf("Ingrese B: ");
-		scanf("%f", &secondNumber);
+		calculator.firstNumber = GetFloat("Ingrese primer numero (A): ");
+		calculator.secondNumber = GetFloat("Ingrese segundo numero (B): ");
+		calculator.operation = GetChar("Ingrese la operacion: Suma (s), Resta (r), División (d), Multiplicación (m) o Factorial (f)\n");
 
-		printf("Ingrese la operacion: Suma (s), Resta (r), División (d), Multiplicación (m) o Factorial (f)\n");
-		__fpurge(stdin);
-		scanf("%c", &operation);
+		calculator = DoOperation(calculator);
 
-		DoOperation(firstNumber, secondNumber, operation);
+		ShowResult(calculator);
 
-		printf("¿Desea realizar otra operacion? s/n");
-		__fpurge(stdin);
-		scanf("%c", &flag);
+		flag = GetChar("¿Desea realizar otra operacion? s/n ");
 
 	}while(flag == 's');
 
