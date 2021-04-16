@@ -6,10 +6,18 @@
  */
 
 #ifndef TP1_LIBS_VALIDATIONS_H_
-#define TP1_LIBS_VALIDATIONS_H_
 
 #include "Structure.h"
 
-short int DoValidations(sCalculator);
+/**
+ * @fn short int DoValidations(sCalculator)
+ * @brief Check operation to do validation for division and factorial
+ *
+ * @param calculator
+ * @return
+ */
+sCalculator DoValidations(sCalculator);
+
+#define TP1_LIBS_VALIDATIONS_H_
 
 #endif /* TP1_LIBS_VALIDATIONS_H_ */

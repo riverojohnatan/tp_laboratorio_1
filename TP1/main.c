@@ -36,9 +36,10 @@ int main()
 	setbuf(stdout, NULL);
 
 	do {
+		InitStructure(calculator);
+
 		calculator.firstNumber = GetFloat("Ingrese primer numero (A): ");
 		calculator.secondNumber = GetFloat("Ingrese segundo numero (B): ");
-		calculator.operation = GetChar("Ingrese la operacion: Suma (s), Resta (r), División (d), Multiplicación (m) o Factorial (f)\n");
 
 		calculator = DoOperation(calculator);
 

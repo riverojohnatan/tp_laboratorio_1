@@ -15,54 +15,29 @@ float DoMultiplicationOperation(float, float);
 int DoFactorialOperation(int);
 
 
-/**
- * @fn sResponse DoOperation(float, float, char)
- * @brief Calculate the operation for the two numbers
- *
- * @param float firstNumber
- * @param float secondNumber
- * @param char operational
- * @return A structure with operation' status
- */
 sCalculator DoOperation(sCalculator calculator){
-	sCalculator response;
+    sCalculator response = InitStructure();
 
-	response.firstNumber = calculator.firstNumber;
-	response.secondNumber = calculator.secondNumber;
-	response.operation = calculator.operation;
-	response.isError = DoValidations(calculator);
+    response.firstNumber = calculator.firstNumber;
+    response.secondNumber = calculator.secondNumber;
 
-	switch(response.operation) {
-		case 's':
-			response.result = DoAdditionOperation(response.firstNumber, response.secondNumber);
-			break;
-		case 'r':
-			response.result = DoSubtractionOperation(response.firstNumber, response.secondNumber);
-			break;
-		case 'm':
-			response.result = DoMultiplicationOperation(response.firstNumber, response.secondNumber);
-			break;
-		case 'd':
-			if (response.isError == 0) {
-				response.result = DoDivisionOperation(response.firstNumber, response.secondNumber);
-			}
-			break;
-		case 'f':
-			if (response.isError != 1) {
-				response.result = DoFactorialOperation(response.firstNumber);
-			}
+	response = DoValidations(response);
 
-			if (response.isError != 2) {
-				response.result2 = DoFactorialOperation(response.secondNumber);
-			}
+	response.results.resultSum = DoAdditionOperation(response.firstNumber, response.secondNumber);
+	response.results.resultSub = DoSubtractionOperation(response.firstNumber, response.secondNumber);
+	response.results.resultMult = DoMultiplicationOperation(response.firstNumber, response.secondNumber);
 
-			break;
-		default:
-			break;
+	if (response.errors.isErrorDivision == 0) {
+		response.results.resultDiv = DoDivisionOperation(response.firstNumber, response.secondNumber);
+	}
+	if (response.errors.isErrorFactorial1 == 0) {
+		response.results.resultFact1 = DoFactorialOperation(response.firstNumber);
+	}
+	if (response.errors.isErrorFactorial2 == 0) {
+		response.results.resultFact2 = DoFactorialOperation(response.secondNumber);
 	}
 
-	return response;
-
+    return response;
 }
 
 float DoAdditionOperation(float firstNumber, float secondNumber){

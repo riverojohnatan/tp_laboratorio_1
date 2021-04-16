@@ -10,25 +10,23 @@
 short int IsValidForDivision(float);
 short int IsValidForFactorial(int);
 
-/**
- * @fn short int DoValidations(sCalculator)
- * @brief Check operation to do validation for division and factorial
- *
- * @param calculator
- * @return
- */
-short int DoValidations(sCalculator calculator) {
 
-	short int response;
+sCalculator DoValidations(sCalculator calculator) {
+    sCalculator response;
 
-	response = 0;
+    response.firstNumber = calculator.firstNumber;
+    response.secondNumber = calculator.secondNumber;
+    response.results = calculator.results;
+    response.errors = calculator.errors;
 
-	if (calculator.operation == 'd' && IsValidForDivision(calculator.secondNumber) != 0) {
-		response = 1;
-	} else if (calculator.operation == 'f' && IsValidForFactorial(calculator.firstNumber) != 0) {
-		response = 1;
-	}else if (calculator.operation == 'f' && IsValidForFactorial(calculator.secondNumber) != 0) {
-		response = 2;
+	if (IsValidForDivision(response.secondNumber) != 0) {
+		response.errors.isErrorDivision = 1;
+	}
+	if (IsValidForFactorial(response.firstNumber) != 0) {
+		response.errors.isErrorFactorial1 = 1;
+	}
+	if (IsValidForFactorial(response.secondNumber) != 0) {
+		response.errors.isErrorFactorial2 = 1;
 	}
 
 	return response;
@@ -37,7 +35,7 @@ short int DoValidations(sCalculator calculator) {
 short int IsValidForDivision(float divider) {
 	short int response = 0;
 
-	if (divider < 1) {
+	if (divider == 0) {
 		response = 1;
 	}
 
