@@ -1,15 +1,12 @@
-/*
- * Employee.h
- *
- *  Created on: May 4, 2021
- *      Author: jrivero
- */
-
 #ifndef EMPLOYEE_H_
 #define EMPLOYEE_H_
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "InputOutput.h"
+
+#define TRUE 0
+#define FALSE 1
 
 struct {
 	int id;

@@ -1,10 +1,3 @@
-/*
- * Employee.c
- *
- *  Created on: May 4, 2021
- *      Author: jrivero
- */
-
 #include "Employee.h"
 
 /**
@@ -17,7 +10,15 @@
  * @return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
  */
 int initEmployees(Employee* list, int len) {
-	return 0;
+	int response = -1;
+	if (list != NULL && len > 0) {
+		for (int i = 0; i < len; i++) {
+			list[i].isEmpty = TRUE;
+		}
+		response = 0;
+	}
+
+	return response;
 }
 
 /**
