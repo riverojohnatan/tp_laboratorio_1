@@ -40,6 +40,7 @@ int main(void) {
 
 	int opc;
 	int listOpc;
+	int sortOpc;
 	int id = 0;
 	int idEmployee;
 	int tries = 3;
@@ -118,7 +119,12 @@ int main(void) {
 						scanf("%d", &listOpc);
 						switch(listOpc) {
 							case 1:
-								sortEmployees(employees, TAM_ESTRUCTURA, listOpc);
+								do {
+									puts("1- Descendente");
+									puts("2- Ascendente");
+									scanf("%d", &sortOpc);
+								} while (sortOpc != 1 && sortOpc != 2);
+								sortEmployees(employees, TAM_ESTRUCTURA, sortOpc - 1);
 								printEmployees(employees, TAM_ESTRUCTURA);
 								break;
 							case 2:
