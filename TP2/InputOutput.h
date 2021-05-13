@@ -35,4 +35,6 @@ void ShowPause();
 /*
 char ShowMenu(sMenu[], int, char *);*/
 
+int ValidateAction(char *);
+
 #endif /* INPUTOUTPUT_H_ */

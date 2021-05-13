@@ -343,3 +343,27 @@ static int isEmpty(char* string) {
 
 	return response;
 }
+
+
+int ValidateAction(char * message) {
+	char opc;
+	int response = 0;
+	int tries = 3;
+
+	GetChar(&opc, message, "");
+	while (opc != 'n' && opc != 's' && tries > 1) {
+		puts("Opcion invalida");
+		GetChar(&opc, message, "");
+		tries--;
+	}
+
+	if (tries > 1) {
+		if (opc == 'n') {
+			response = 1;
+		}
+	} else {
+		response = -1;
+	}
+
+	return response;
+}
