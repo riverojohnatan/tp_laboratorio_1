@@ -206,6 +206,24 @@ int removeEmployee(Employee* list, int len, int id) {
 	return response;
 }
 
+int cmpUp ( const void *A, const void *B ) {
+    const Employee *a=A, *b=B;
+
+    if( a->sector == b->sector) {
+        return strcmp(a->lastName, b->lastName);
+    }
+    return a->sector > b->sector ? 1 : -1 ;
+}
+
+int cmpDown ( const void *A, const void *B ) {
+    const Employee *a=A, *b=B;
+
+    if( a->sector == b->sector) {
+        return strcmp(b->lastName, a->lastName);
+    }
+    return a->sector < b->sector ? 1 : -1 ;
+}
+
 /**
  * @fn int sortEmployees(Employee*, int, int)
  * @brief Sort the elements in the array of employees, the argument order indicate UP or DOWN order
@@ -216,33 +234,14 @@ int removeEmployee(Employee* list, int len, int id) {
  * @return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
  */
 int sortEmployees(Employee* list, int len, int order) {
-	int response = 0;
-	int i;
-	int j;
-	Employee aux;
-
+	int response = -1;
 	if (list != NULL && len > 0) {
-		for (i = 0; i < len - 1; i++) {
-			for (j = i + 1; j < len; j++) {
-				if (list[i].isEmpty == FALSE
-						&& list[j].isEmpty == FALSE) {
-					if(order == 1) {
-						if (strcmp(list[i].lastName, list[i].lastName) > 0) {
-							aux = list[i];
-							list[i] = list[j];
-							list[j] = aux;
-						}
-					} else {
-						if (strcmp(list[i].lastName, list[i].lastName) < 0) {
-							aux = list[i];
-							list[i] = list[j];
-							list[j] = aux;
-						}
-					}
-				}
-			}
+		if(order == 1) {
+			qsort(list, len, sizeof(Employee), cmpUp);
+		} else {
+			qsort(list, len, sizeof(Employee), cmpDown);
 		}
-		response = 1;
+		response = 0;
 	}
 	return response;
 }
