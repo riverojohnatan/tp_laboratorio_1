@@ -80,46 +80,57 @@ int main(void) {
 				system("read -p 'Ingrese Enter para continuar...' var");
 				break;
 			case 2:
-				if (editEmployee(employees, TAM_ESTRUCTURA) == 0) {
-					puts("\n * MODIFICACION DE Empleado EXITOSA * \n");
-					printEmployees(employees, TAM_ESTRUCTURA);
+				if (countCreated(employees, TAM_ESTRUCTURA) > 0) {
+					if (editEmployee(employees, TAM_ESTRUCTURA) == 0) {
+						puts("\n * MODIFICACION DE Empleado EXITOSA * \n");
+						printEmployees(employees, TAM_ESTRUCTURA);
+					} else {
+						puts("\n * MODIFICACION DE Empleado CANCELADA * ");
+					}
 				} else {
-					puts("\n * MODIFICACION DE Empleado CANCELADA * ");
+					puts("\n * NO HAY EMPLEADOS * ");
 				}
 				system("read -p 'Ingrese Enter para continuar...' var");
 				break;
 			case 3:
-				printEmployees(employees, TAM_ESTRUCTURA);
-				GetInt(&idEmployee, "Ingrese Id del empleado a eliminar: ", "Ingreso erroneo");
-
-
-				if (removeEmployee(employees, TAM_ESTRUCTURA, idEmployee) != -1) {
-					puts("\n * BAJA DE Empleado EXITOSA");
+				if (countCreated(employees, TAM_ESTRUCTURA) > 0) {
 					printEmployees(employees, TAM_ESTRUCTURA);
+					GetInt(&idEmployee, "Ingrese Id del empleado a eliminar: ", "Ingreso erroneo");
+
+
+					if (removeEmployee(employees, TAM_ESTRUCTURA, idEmployee) != -1) {
+						puts("\n * BAJA DE Empleado EXITOSA");
+						printEmployees(employees, TAM_ESTRUCTURA);
+					} else {
+						puts("\n * BAJA DE Empleado CANCELADA");
+					}
 				} else {
-					puts("\n * BAJA DE Empleado CANCELADA");
+					puts("\n * NO HAY EMPLEADOS * ");
 				}
 				system("read -p 'Ingrese Enter para continuar...' var");
 				break;
 			case 4:
-				do {
-					puts("Elija el informe:");
-					puts("1- Listado de empleados");
-					puts("2- Total y promedio de los salarios, y cuantos empleados superan el salario promerio");
-					scanf("%d", &listOpc);
-					switch(listOpc) {
-						case 1:
-							sortEmployees(employees, TAM_ESTRUCTURA, listOpc);
-							if (printEmployees(employees, TAM_ESTRUCTURA) == -1) {
-								puts("\n * NO HAY EMPLEADOS * ");
-							}
-							break;
-						case 2:
-							break;
-						default:
-							puts("Ingreso erroneo");
-					}
-				} while (listOpc != 1 && listOpc != 2);
+				if (countCreated(employees, TAM_ESTRUCTURA) > 0) {
+					do {
+						puts("Elija el informe:");
+						puts("1- Listado de empleados");
+						puts("2- Total y promedio de los salarios, y cuantos empleados superan el salario promerio");
+						scanf("%d", &listOpc);
+						switch(listOpc) {
+							case 1:
+								sortEmployees(employees, TAM_ESTRUCTURA, listOpc);
+								printEmployees(employees, TAM_ESTRUCTURA);
+								break;
+							case 2:
+								calculateAndShowAverageSalaries(employees, TAM_ESTRUCTURA);
+								break;
+							default:
+								puts("Ingreso erroneo");
+						}
+					} while (listOpc != 1 && listOpc != 2);
+				} else {
+					puts("\n * NO HAY EMPLEADOS * ");
+				}
 				system("read -p 'Ingrese Enter para continuar...' var");
 				break;
 		}

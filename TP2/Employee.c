@@ -311,3 +311,34 @@ void showOneEmployee(Employee employee) {
 			employee.sector);
 }
 
+/**
+ * @fn void calculateAndShowSalaries(Employee*, int)
+ * @brief
+ *
+ * @param list Employee* Pointer to array of employees
+ * @param len int Array length
+ */
+void calculateAndShowAverageSalaries(Employee * list, int len) {
+	int count=0;
+	int employeeBeyondAverageCount = 0;
+	float salariesCount = 0;
+	float averageSalary;
+
+	for(int i=0; i<len; i++) {
+		if(list[i].isEmpty == FALSE) {
+			salariesCount+= list[i].salary;
+			count++;
+		}
+	}
+
+	averageSalary = salariesCount / count;
+	for(int i=0; i<len; i++) {
+		if(list[i].isEmpty == FALSE && list[i].salary > averageSalary) {
+			employeeBeyondAverageCount++;
+		}
+	}
+
+	printf("Total de salarios: %.2f\n", salariesCount);
+	printf("Promedio de salarios: %.2f\n", averageSalary);
+	printf("%d Empleados superan el promedio\n", employeeBeyondAverageCount);
+}

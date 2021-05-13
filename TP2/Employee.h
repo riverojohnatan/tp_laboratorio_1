@@ -32,5 +32,6 @@ int sortEmployees(Employee*, int, int);
 int printEmployees(Employee*, int);
 void showOneEmployee(Employee);
 int countCreated(Employee*, int);
+void calculateAndShowAverageSalaries(Employee *, int);
 
 #endif /* EMPLOYEE_H_ */
